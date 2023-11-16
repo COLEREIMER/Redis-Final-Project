@@ -1,6 +1,6 @@
 Redis Documentation - CSCI331 Final Project
 
-Group Member: Cole Reimer - 
+Group Member: Cole Reimer - https://github.com/COLEREIMER
               Caleb Philipsek - https://github.com/calebphilipsek
                                 
 
