@@ -10,27 +10,41 @@
     <!-- Modify body based on Redis Return values? -->
     
     <div id="nav">
-        <div id="search">This should be an empty box and a button <div id="searchBox"></div><button id="submit" type="submit">Submit<!-- maybe use small photo of mag glass?--></button></div>
-        <div id="profile">Links to profile</div>
-        <div id="logout">Button to logout<button id="logout">Logout</button></div>
+        <div id="links">
+            <a href="profile.html" class="button">Profile</a>
+            <a href="friendlist.html" class="button">Friends</a>
+        </div>
+        <div id="search">
+            <div id="searchBox">
+                <input type="text" placeholder="Search">
+            </div>
+            <button type="submit">Submit</button>
+        </div>
     </div>
     
-    <form action="../php/profile.php" id="test">
-        This is to test profile php
-    
-        <button type="submit"></button>
-    </form>
+    <div id="content">
+        <div id="profileInfo">
+            <div id="profilePicture">
+            </div>
+            <div id="name">John Doe</div>
+            <div id="updateBio">
+                <button>Update Bio</button>
+            </div>
+        </div>
+        <div id="Bio">
+            <div id="bioText">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id.
+            </div>
+        </div>
+        <div id="posts">
+            <div class="post"></div>
+            <div class="post"></div>
+            <div class="post"></div>
+        </div>
+    </div>
 
-    <div id="name">This will be changed to user name</div>
-    <div id="friends">
-        <!-- top of friends have add friend? -->
-        <div id="addfriend"></div>
-        This should display a list of the user's friends
-        maybe even an add friends button
-    </div>
-    <div id="Bio">
-        <div id="updateBio">This should be CRUD ops for bio <button id="update">Update Bio<!--This should toggle between input field and text display for bioText--></button></div>
-        <div id="bioText">This is where the user should write their bio during CRUD, display their bio otherwise</div>
+    <div id="logout">
+        <a href="../index.html">Logout</a>
     </div>
 </body>
 </html>
