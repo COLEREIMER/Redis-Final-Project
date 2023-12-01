@@ -10,19 +10,27 @@
     <!-- Modify body based on Redis Return values? -->
     
     <div id="nav">
-        <div id="search">This should be an empty box and a button <div id="searchBox"></div><button type="submit">Submit<!-- maybe use small photo of mag glass?--></button></div>
-        <div id="profile">Links to </div>
-        <div id="logout"></div>
+        <div id="search">This should be an empty box and a button <div id="searchBox"></div><button id="submit" type="submit">Submit<!-- maybe use small photo of mag glass?--></button></div>
+        <div id="profile">Links to profile</div>
+        <div id="logout">Button to logout<button id="logout">Logout</button></div>
     </div>
     
-    <div id="name"></div>
+    <form action="../php/profile.php" id="test">
+        This is to test profile php
+    
+        <button type="submit"></button>
+    </form>
+
+    <div id="name">This will be changed to user name</div>
     <div id="friends">
         <!-- top of friends have add friend? -->
         <div id="addfriend"></div>
+        This should display a list of the user's friends
+        maybe even an add friends button
     </div>
     <div id="Bio">
-        <div id="updateBio"></div>
-        <div id="bioText"></div>
+        <div id="updateBio">This should be CRUD ops for bio <button id="update">Update Bio<!--This should toggle between input field and text display for bioText--></button></div>
+        <div id="bioText">This is where the user should write their bio during CRUD, display their bio otherwise</div>
     </div>
 </body>
 </html>
