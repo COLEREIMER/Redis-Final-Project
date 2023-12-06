@@ -1,0 +1,51 @@
+<!-- General Profile page goal to support Search, Add friends, update bio -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../javascript/profile.js" type="text/javascript">import {createClient} from "redis";</script>
+    <title>Profile Page</title>
+</head>
+<body>
+    <!-- Modify body based on Redis Return values? -->
+    
+    <div id="nav">
+        <div id="links">
+            <a href="profile.html" class="button">Profile</a>
+            <a href="friendlist.html" class="button">Friends</a>
+        </div>
+        <form id="search">
+            <div id="searchBox">
+                <input type="text" placeholder="Search">
+            </div>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <div id="content">
+        <div id="profileInfo">
+            <!-- <div id="profilePicture">
+            </div> -->
+            <!-- <div id="name">John Doe</div> -->
+            <form action="/updateBio" method="post">
+                <input type="text" id="newBio">
+                <button type="submit" id="updateBio">Update Bio</button>
+            </form>
+        </div>
+        <div id="Bio">
+            <div id="bioText">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id.
+            </div>
+        </div>
+        <div id="posts">
+            <div class="post"></div>
+            <div class="post"></div>
+            <div class="post"></div>
+        </div>
+    </div>
+
+    <div id="logout">
+        <a href="../index.html">Logout</a>
+    </div>
+</body>
+</html>
