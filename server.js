@@ -19,9 +19,8 @@ const client = redis.createClient({
 		console.log("Listening on port 3000");
 	});
 
-
 	app.get("/", (req,res) => {
-	    res.sendFile(__dirname + "/index.html")
+	    res.sendFile(__dirname + "/public/index.html")
 	});
 
 	const checkCreds = async function (req, res) {
@@ -30,28 +29,44 @@ const client = redis.createClient({
 		if (req.body.username === undefined || req.body.username === null) {
 			console.log("username bad input")
 		}
-        const rPass = await client.get(req.body.username);
+        const rPass = await client.hGet(req.body.username, 'password', function (err, obj) {
+			rPass = obj;
+		 });
 		if (rPass === undefined || rPass === null) {
 			console.log("rPass not defined")
 			res.sendFile(__dirname + "/public/index.html")
 		} else if (rPass === req.body.password) {
+			res.cookie('data', JSON.stringify(await client.hGetAll(req.body.username)))
+			res.cookie('user', req.body.username)
             res.sendFile(__dirname + "/public/HTML/profile.html");
         } else {
-            console.log("Bad login credentials")
+            console.log("Bad login credentials " + rPass)
 			res.sendFile(__dirname + "/public/index.html")
         }
         await client.disconnect()
 	}
 
-	const updateBio = async function (req, res, next) {
+	const updateBio = async function (req, res) {
 		await client.connect()
 		console.log("This is the updateBio handler")
-		if (req.body.updateBio === undefined || req.body.updateBio === null) {
+		if (req.body.newBio === undefined || req.body.newBio === null) {
 			console.log("There was no bio to update")
+
 		} else {
-			client.set(username, {bio:req.body.bio})
+			await client.hSet(req.body.usernameBio, 'bio', req.body.newBio)
+			// res.cookie('data', JSON.stringify(await client.hGetAll(req.body.usernameBio)))
+			// res.cookie('user', req.body.usernameBio)
 		}
+		if (req.body.usernameBio === undefined || req.body.usernameBio === null) {
+			console.log("usernameBio is null and problems are happening")
+			console.log(req.body.usernameBio)
+		} else {
+		res.cookie('data', JSON.stringify(await client.hGetAll(req.body.usernameBio)))
+		res.cookie('user', req.body.usernameBio)
+		}
+		res.sendFile(__dirname + "/public/HTML/profile.html");
+		await client.disconnect()
 	}
 
-	app.post("/test", checkCreds)
+	app.post("/login", checkCreds)
 	app.post("/updateBio", updateBio)

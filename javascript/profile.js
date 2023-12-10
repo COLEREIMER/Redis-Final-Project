@@ -1,26 +1,47 @@
-import { createClient } from 'redis';
+const getCookie = (name) => {
+    const value = "; " + document.cookie;
+    const parts = value.split("; " + name + "=");
+    if (parts.length === 2) return parts.pop().split(";").shift();
+  };
+  
+  const deleteCookie = (name) => {
+    document.cookie = name + '=; max-age=0;';
+  };
+  
+  const parseObjectFromCookie = (cookie) => {
+    const decodedCookie = decodeURIComponent(cookie);
+    return JSON.parse(decodedCookie);
+  };
+  
+  window.onload = () => {
+    let dataCookie = getCookie('data');
+    deleteCookie('data');
+    
+    let userCookie = getCookie('user');
+    deleteCookie('user');
 
-const client = createClient();
+    if (dataCookie) {
+      const data = parseObjectFromCookie(dataCookie);
+      // work with data. `data` is equal to `visitCard` from the server
+      // alert(JSON.stringify(data));
+      const bio = document.getElementById("bioText");
+      bio.innerHTML = data.bio
+      
+    } else {
+      // handle data not found
+    }
 
-client.on('error', err => console.log('Redis Client Error', err));
+    if (userCookie) {
 
-await client.connect();
+    } else {
+      console.log("userCookie broken")
+    }
 
-await client.hSet('user-session:123', {
-    name: 'John',
-    surname: 'Smith',
-    company: 'Redis',
-    age: 29
-})
-
-let userSession = await client.hGetAll('user-session:123');
-console.log(JSON.stringify(userSession, null, 2));
-
-
-const getBtn = document.getElementById("submit")
-
-getBtn.addEventListener("click", test)
-
-function test() {
-
-}
+      console.log(userCookie);
+      const name = document.getElementById("name");
+      const usernameBio = document.getElementById("usernameBio")
+      usernameBio.value = userCookie;
+      // const friends = getElementById("");
+      name.innerHTML = userCookie;
+      // alert(usernameBio.value)
+  }
