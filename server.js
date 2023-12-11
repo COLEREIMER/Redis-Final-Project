@@ -74,7 +74,7 @@ const updateBio = async function (req, res) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const getFriends = async function (req, res) {
-	await client.connect();
+    await client.connect();
     console.log("This is the getFriends handler");
 
     let username = req.body.username1; // || req.cookies.user;
@@ -86,51 +86,19 @@ const getFriends = async function (req, res) {
         return;
     }
 
-    try {
-        const friendsList = await client.hGet(username, 'friends');
+    const friendsList = await client.hGet(username, 'friends');
         
-        if (friendsList === null) {
-            console.log("No friends list found for this user");
-            res.status(404).sendFile(__dirname + "/public/HTML/friendslist.html");
-        } else {
-            const friendsHtml = friendsList.split(',').map(friend => `<li>${friend}</li>`).join('');
-            const htmlContent = `<ul>${friendsHtml}</ul>`;
-
-            res.send(htmlContent);
-        }
-    } catch (error) {
-        console.error("Error fetching friends list: ", error);
-        res.status(500).send("Internal server error");
-    } finally {
-        await client.disconnect();
+    if (friendsList === null) {
+        console.log("No friends list found for this user");
+        res.status(404).send("No friends list found");
+    } else {
+        res.json({ friends: friendsList.split(',') }); // Send back a JSON response
     }
+    await client.disconnect();
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-const searchCache = async function (req, res) {
-	await client.connect()
-	console.log("This is the search function");
-
-	let username = req.body.username2;
-	let query = req.body.search;
-	
-	if (!query) {
-		console.log("Query undefined")
-	} else {
-		let data = await client.KEYS ('*' + query + '*');
-	}
-	// res.cookie('data', JSON.stringify(await client.hGetAll(req.body.username)))
-	res.cookie('user', req.body.username)
-	res.cookie('data', data)
-	res.send
-
-}
-
-
-
 app.post("/login", checkCreds)
 app.post("/updateBio", updateBio)
 app.post("/getFriends", getFriends)
-app.post("/search", searcheCache)
