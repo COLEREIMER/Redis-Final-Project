@@ -9,105 +9,23 @@
 <body>
     <div id="nav">
         <div id="links">
-            <a href="profile.html" class="button">Profile</a>
-            <a href="friendlist.html" class="button">Friends</a>
-        </div>
-        <div id="search">
-            <div id="searchBox">
-                <input type="text" id="searchInput" placeholder="Search" oninput="filterFriends()">
-            </div>
-            <button type="submit">Submit</button>
+            <a href="../../HTML/profile.html" class="button">Profile</a>
         </div>
     </div>
-    
-    <div id="friends">
-        <div class="friend">
-            <img src="../images/chicken-joe.jpg" alt="Friend 1">
-            <div class="friend-info">
-                <h3>Chicken Joe</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-        </div>
-        <div class="friend">
-            <img src="../images/cinderella.webp" alt="Friend 2">
-            <div class="friend-info">
-                <h3>Cinderella</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-        </div>
-        <div class="friend">
-            <img src="../images/moana.jpg" alt="Friend 1">
-            <div class="friend-info">
-                <h3>Moana</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-        </div>
-        <div class="friend">
-            <img src="../images/m.jpg" alt="Friend 2">
-            <div class="friend-info">
-                <h3>Maui</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-        </div>
-        <div class="friend">
-            <img src="../images/floundy.webp" alt="Friend 1">
-            <div class="friend-info">
-                <h3>Flounder</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-        </div>
-        <div class="friend">
-            <img src="../images/olaf.webp" alt="Friend 2">
-            <div class="friend-info">
-                <h3>Olaf</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-        </div>
-        <div class="friend">
-            <img src="../images/grumpy.webp" alt="Friend 1">
-            <div class="friend-info">
-                <h3>Grumpy</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-        </div>
-        <div class="friend">
-            <img src="../images/s.jpg" alt="Friend 2">
-            <div class="friend-info">
-                <h3>Spongebob</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-        </div>
-        <div class="friend">
-            <img src="../images/l.jpeg" alt="Friend 1">
-            <div class="friend-info">
-                <h3>Lightning McQueen</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-        </div>
-        <div class="friend">
-            <img src="../images/c.webp" alt="Friend 2">
-            <div class="friend-info">
-                <h3>Chick Hicks</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-        </div>
-        <!-- Add more friend entries as needed -->
-    </div>
+
+
+    <form action="/getFriends" method="post">
+        <button type="submit" id="getFriendsButton">Get Friends</button>
+    </form>
 
     <div id="logout">
         <a href="../index.html">Logout</a>
     </div>
 
-    <script>
-        function filterFriends() {
-            const searchInput = document.getElementById('searchInput').value.toLowerCase();
-            const friends = document.getElementsByClassName('friend');
+    <script src="../javascript/friendslist.js"></script>
+</body>
+</html>
 
-            for (const friend of friends) {
-                const friendName = friend.querySelector('h3').innerText.toLowerCase();
-                const isVisible = friendName.includes(searchInput);
-                friend.style.display = isVisible ? 'flex' : 'none';
-            }
         }
     </script>
 </body>
