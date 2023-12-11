@@ -1,49 +1,74 @@
 const getCookie = (name) => {
-    const value = "; " + document.cookie;
-    const parts = value.split("; " + name + "=");
-    if (parts.length === 2) return parts.pop().split(";").shift();
-  };
-  
-  const deleteCookie = (name) => {
-    document.cookie = name + '=; max-age=0;';
-  };
-  
-  const parseObjectFromCookie = (cookie) => {
-    const decodedCookie = decodeURIComponent(cookie);
-    return JSON.parse(decodedCookie);
-  };
-  
-  window.onload = () => {
-    let dataCookie = getCookie('data');
-    deleteCookie('data');
-    
-    let userCookie = getCookie('user');
-    deleteCookie('user');
+  const value = "; " + document.cookie;
+  const parts = value.split("; " + name + "=");
+  if (parts.length === 2) return parts.pop().split(";").shift();
+};
 
-    if (dataCookie) {
-      const data = parseObjectFromCookie(dataCookie);
-      // work with data. `data` is equal to `visitCard` from the server
-      // alert(JSON.stringify(data));
-      const bio = document.getElementById("bioText");
-      bio.innerHTML = data.bio
-      
-    } else {
-      // handle data not found
-    }
+const deleteCookie = (name) => {
+  document.cookie = name + '=; max-age=0;';
+};
 
-    if (userCookie) {
+const parseObjectFromCookie = (cookie) => {
+  const decodedCookie = decodeURIComponent(cookie);
+  return JSON.parse(decodedCookie);
+};
 
-    } else {
-      console.log("userCookie broken")
-    }
+const displayFriendsList = (friendsList) => {
+  const listContainer = document.createElement('div');
+  listContainer.id = 'friendsList';
 
-      console.log(userCookie);
-      const name = document.getElementById("name");
-      const username = document.getElementById("username")
-      const username1 = document.getElementById("username1")
-      username.value = userCookie;
-      username1.value = userCookie;
-      // const friends = getElementById("");
-      name.innerHTML = userCookie;
-      // alert(usernameBio.value)
+  const list = document.createElement('ul');
+  friendsList.forEach(friend => {
+    const listItem = document.createElement('li');
+    listItem.textContent = friend;
+    list.appendChild(listItem);
+  });
+
+  listContainer.appendChild(list);
+  const getFriendsButton = document.getElementById('getFriendsButton');
+  getFriendsButton.insertAdjacentElement('afterend', listContainer);
+};
+
+window.onload = () => {
+  let dataCookie = getCookie('data');
+  deleteCookie('data');
+
+  let userCookie = getCookie('user');
+  deleteCookie('user');
+
+  if (dataCookie) {
+    const data = parseObjectFromCookie(dataCookie);
+    const bio = document.getElementById("bioText");
+    bio.innerHTML = data.bio;
   }
+
+  if (userCookie) {
+    const name = document.getElementById("name");
+    const username = document.getElementById("username");
+    const username1 = document.getElementById("username1");
+    username.value = userCookie;
+    username1.value = userCookie;
+    name.innerHTML = userCookie;
+
+    // Event listener for Get Friends button
+    const getFriendsButton = document.getElementById('getFriendsButton');
+    getFriendsButton.addEventListener('click', function(event) {
+      event.preventDefault();
+
+      fetch('/getFriends', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username1: username1.value })
+      })
+      .then(response => response.json())
+      .then(data => {
+        displayFriendsList(data.friends);
+      })
+      .catch(error => console.error('Error:', error));
+    });
+  } else {
+    console.log("userCookie broken");
+  }
+};
