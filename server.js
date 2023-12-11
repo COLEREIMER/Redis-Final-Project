@@ -77,7 +77,7 @@ const getFriends = async function (req, res) {
     await client.connect();
     console.log("This is the getFriends handler");
 
-    let username = req.body.username1;//|| req.cookies.user;
+    let username = req.body.username1; // || req.cookies.user;
 
     if (!username) {
         console.log("No username found in request body or cookies");
@@ -85,9 +85,26 @@ const getFriends = async function (req, res) {
         await client.disconnect();
         return;
     }
-    
-	await client.disconnect();
-}
+
+    try {
+        const friendsList = await client.hGet(username, 'friends');
+        
+        if (friendsList === null) {
+            console.log("No friends list found for this user");
+            res.status(404).sendFile(__dirname + "/public/HTML/friendslist.html");
+        } else {
+            const friendsHtml = friendsList.split(',').map(friend => `<li>${friend}</li>`).join('');
+            const htmlContent = `<ul>${friendsHtml}</ul>`;
+
+            res.send(htmlContent);
+        }
+    } catch (error) {
+        console.error("Error fetching friends list: ", error);
+        res.status(500).send("Internal server error");
+    } finally {
+        await client.disconnect();
+    }
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
