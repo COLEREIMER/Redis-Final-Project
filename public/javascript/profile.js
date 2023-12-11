@@ -40,7 +40,9 @@ const getCookie = (name) => {
       console.log(userCookie);
       const name = document.getElementById("name");
       const username = document.getElementById("username")
+      const username1 = document.getElementById("username1")
       username.value = userCookie;
+      username1.value = userCookie;
       // const friends = getElementById("");
       name.innerHTML = userCookie;
       // alert(usernameBio.value)

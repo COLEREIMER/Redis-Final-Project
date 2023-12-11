@@ -1,10 +1,10 @@
 const express = require("express");
 const app = express();
-const cookieParser = require('cookie-parser');
+// const cookieParser = require('cookie-parser');
 
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
-app.use(cookieParser());
+// app.use(cookieParser());
 
 const redis = require("redis");
 const client = redis.createClient({
@@ -56,16 +56,16 @@ const updateBio = async function (req, res) {
 	if (req.body.newBio === undefined || req.body.newBio === null) {
 		console.log("There was no bio to update")
 	} else {
-		await client.hSet(req.body.usernameBio, 'bio', req.body.newBio)
+		await client.hSet(req.body.username, 'bio', req.body.newBio)
 		// res.cookie('data', JSON.stringify(await client.hGetAll(req.body.usernameBio)))
 		// res.cookie('user', req.body.usernameBio)
 	}
-	if (req.body.usernameBio === undefined || req.body.usernameBio === null) {
+	if (req.body.username === undefined || req.body.username === null) {
 		console.log("usernameBio is null and problems are happening")
-		console.log(req.body.usernameBio)
+		console.log(req.body.username)
 	} else {
-	res.cookie('data', JSON.stringify(await client.hGetAll(req.body.usernameBio)))
-	res.cookie('user', req.body.usernameBio)
+	res.cookie('data', JSON.stringify(await client.hGetAll(req.body.username)))
+	res.cookie('user', req.body.username)
 	}
 	res.sendFile(__dirname + "/public/HTML/profile.html");
 	await client.disconnect()
@@ -77,7 +77,7 @@ const getFriends = async function (req, res) {
     await client.connect();
     console.log("This is the getFriends handler");
 
-    let username = req.body.usernameFriends || req.cookies.user;
+    let username = req.body.username1;//|| req.cookies.user;
 
     if (!username) {
         console.log("No username found in request body or cookies");
