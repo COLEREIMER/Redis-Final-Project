@@ -1,14 +1,17 @@
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* Reset some default styles */
+body, h1, h2, h3, p, ul, li {
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0; /* Light gray background */
-    color: #333; /* Dark text color */
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
 }
 
 #nav {
-    background-color: #333; /* Dark gray background */
-    color: #fff; /* White text color */
+    background-color: #333;
     padding: 10px;
     display: flex;
     justify-content: space-between;
@@ -20,109 +23,143 @@ body {
 }
 
 .button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-right: 10px;
     text-decoration: none;
-    color: #fff; /* White text color */
-    padding: 10px;
-    margin-right: 10px; /* Added margin */
+    color: #fff;
+    background-color: #333; /* Dark background color */
     border-radius: 5px;
-    cursor: pointer;
-    background-color: #555; /* Medium gray background */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+.button:hover {
+    background-color: #28556b; /* Darker background color on hover */
 }
 
 #search {
     display: flex;
     align-items: center;
+    margin-right: -40px; /* Add margin to push the search box to the right */
 }
 
 #searchBox {
-    margin-right: 10px;
+    position: relative;
 }
 
-#search input {
-    padding: 5px;
-    border: 1px solid #777; /* Dark gray border */
+input[type="text"] {
+    padding: 8px;
     border-radius: 5px;
+    border: 1px solid #000; /* Black border */
+    padding-left: 5px; /* Space for the magnifying glass icon */
+    background-color: #ffffff; /* Dark background color */
+    color: #fff; /* White text color */
+}
+
+#searchIcon {
+    position: absolute;
+    top: 50%;
+    left: -25px; /* Adjust the left position as needed */
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+#searchIcon:hover {
+    color: #28556b; /* Darker purple color on hover */
+}
+
+#searchBox input[type="text"] {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #000;
+    padding-left: 5px;
+    background-color: #ffffff;
+    color: #333; /* Change text color to a darker shade */
+}
+
+#content {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #profileInfo {
     text-align: center;
-    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-#profilePicture {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin: 20px auto;
-    overflow: hidden;
-    border: 4px solid #333; /* Dark gray border */
-    background-color: #fff; /* White background */
-}
-
-#profilePicture img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-#name {
-    font-size: 28px;
-    font-weight: bold;
-    color: #333; /* Dark text color */
-}
-
-#updateBio button {
-    padding: 8px;
-    cursor: pointer;
-    background-color: #fff; /* White background */
-    color: #333; /* Dark text color */
-    border: none;
-    border-radius: 5px;
-    margin-top: 10px;
-}
-
-#content {
-    padding: 20px;
+input[type="text"] {
+    width: 60%;
+    padding: 10px;
+    margin-right: 10px;
 }
 
 #Bio {
-    margin-top: 20px;
     text-align: center;
+    margin-bottom: 20px;
+}
+
+#newBio {
+    width: 60%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #000;
+    background-color: #ffffff; /* Add a background color for better visibility */
+    color: #333; /* Adjust text color to a darker shade */
+}
+
+#updateBio {
+    display: block;
+    margin: 10px auto;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #28556b;
+    color: #ffffff; /* Change text color to white */
+    cursor: pointer;
 }
 
 #bioText {
-    margin-top: 10px;
+    line-height: 1.6;
 }
 
 #posts {
     display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .post {
-    width: 30%;
-    height: 100px;
-    border: 1px solid #333; /* Dark gray border */
-    border-radius: 8px;
-    background-color: #f0f0f0; /* Light gray background */
+    flex: 1 1 calc(33.333% - 20px);
+    background-color: #eee;
+    padding: 20px;
+    border-radius: 10px; /* Adjust border-radius if needed */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+
+    width: 200px; /* Set a fixed width for the posts */
+    height: 200px; /* Set a fixed height for the posts */
 }
 
 #logout {
-    position: fixed;
     text-align: center;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 20px;
-    background-color: #333; /* Dark gray background */
+    margin-top: 20px;
 }
 
-#logout a {
+a {
+    color: #28556b;
     text-decoration: none;
-    color: #fff; /* White text color */
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #555; /* Medium gray background */
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#name {
+    font-size: 24px; /* Adjust the font size as needed */
+    text-align: center;
+    text-transform: capitalize; /* Capitalize the first letter */
+    margin-bottom: 10px; /* Add some space below the username */
 }
