@@ -1,14 +1,14 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0; /* Light gray background */
-    color: #333; /* Dark text color */
+    background-color: #f4f4f4; 
+    color: #333;
 }
 
 #nav {
-    background-color: #333; /* Dark gray background */
-    color: #fff; /* White text color */
+    background-color: #333;
+    color: #fff;
     padding: 10px;
     display: flex;
     justify-content: space-between;
@@ -20,42 +20,67 @@ body {
 }
 
 .button {
+    display: inline-block; 
+    padding: 10px 20px;
+    margin-right: 10px;
     text-decoration: none;
-    color: #fff; /* White text color */
-    padding: 10px;
-    margin-right: 10px; /* Added margin */
+    color: #fff;
+    background-color: #333;
     border-radius: 5px;
-    cursor: pointer;
-    background-color: #555; /* Medium gray background */
+    transition: background-color 0.3s; 
+}
+
+.button:hover {
+    background-color: #28556b;
+    text-decoration: none;
 }
 
 #search {
     display: flex;
     align-items: center;
+    margin-right: -40px;
 }
 
 #searchBox {
-    margin-right: 10px;
+    position: relative;
 }
 
-#search input {
-    padding: 5px;
-    border: 1px solid #777; /* Dark gray border */
+input[type="text"] {
+    padding: 8px;
     border-radius: 5px;
+    border: 1px solid #000;
+    background-color: #ffffff;
+    color: #333;
+}
+
+#searchIcon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+#searchIcon:hover {
+    color: #28556b;
 }
 
 #friends {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
     padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .friend {
     margin-bottom: 20px;
     padding: 20px;
-    background-color: #f0f0f0; /* Light gray background */
-    border: 1px solid #333; /* Dark gray border */
-    border-radius: 5px;
+    background-color: #eee;
+    border-radius: 10px;
     display: flex;
     align-items: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .friend img {
@@ -72,7 +97,7 @@ body {
 
 .friend h3 {
     font-size: 18px;
-    color: #333; /* Dark text color */
+    color: #333;
     margin-bottom: 5px;
 }
 
@@ -80,21 +105,51 @@ body {
     margin: 0;
 }
 
-#logout {
-    position: fixed;
-    text-align: center;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 20px;
-    background-color: #333; /* Dark gray background */
+#logout a {
+    display: inline-block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #28556b;
+    border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
-#logout a {
+#logout a:hover {
+    text-decoration: underline;
+}
+
+#logout {
+    position: fixed;
+    bottom: 0;
+    width: 100%; 
+    text-align: center; 
+    padding: 10px 0; 
+}
+
+a {
+    color: #28556b;
     text-decoration: none;
-    color: #fff; /* White text color */
-    padding: 10px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#getFriendsButton {
+    padding: 10px 20px;
+    margin: 20px auto;
+    display: block; /* Center button in the div */
+    text-align: center;
+    color: #fff;
+    background-color: #333;
+    border: none;
     border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
-    background-color: #555; /* Medium gray background */
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#getFriendsButton:hover {
+    background-color: #28556b;
+    transform: scale(1.05); /* Slightly enlarge on hover */
 }
