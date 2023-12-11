@@ -14,8 +14,9 @@ body {
     background-color: #333;
     padding: 10px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end; /* Aligns the search bar to the right */
     align-items: center;
+    width: 100%; /* Stretches the nav bar across the entire width */
 }
 
 #links {
@@ -42,8 +43,9 @@ body {
 #search {
     display: flex;
     align-items: center;
-    margin-right: -40px; /* Add margin to push the search box to the right */
+    margin-left: auto; /* Pushes the search bar to the right */
 }
+
 
 #searchBox {
     position: relative;
@@ -52,12 +54,11 @@ body {
 input[type="text"] {
     padding: 8px;
     border-radius: 5px;
-    border: 1px solid #000; /* Black border */
-    padding-left: 5px; /* Space for the magnifying glass icon */
-    background-color: #ffffff; /* Dark background color */
-    color: #fff; /* White text color */
+    border: 1px solid #000;
+    background-color: #ffffff; /* White background */
+    color: #333; /* Dark text for visibility */
+    /* Removed the left padding adjustment */
 }
-
 #searchIcon {
     position: absolute;
     top: 50%;
