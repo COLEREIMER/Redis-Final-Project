@@ -1,3 +1,4 @@
+const e = require("express");
 const express = require("express");
 const app = express();
 // const cookieParser = require('cookie-parser');
@@ -38,8 +39,16 @@ const checkCreds = async function (req, res) {
 		console.log("rPass not defined")
 		res.sendFile(__dirname + "/public/index.html")
 	} else if (rPass === req.body.password) {
+		logins = await client.get(req.body.username + "Logins")
+		if (!logins) {
+			await client.set(req.body.username + "Logins", 1)
+			logins = client.get(req.body.username + "Logins")
+		} else {
+			await client.incr(req.body.username + "Logins")
+		}
 		res.cookie('data', JSON.stringify(await client.hGetAll(req.body.username)))
 		res.cookie('user', req.body.username)
+		res.cookie('logins', logins)
         res.sendFile(__dirname + "/public/HTML/profile.html");
     } else {
         console.log("Bad login credentials " + rPass)
@@ -99,7 +108,62 @@ const getFriends = async function (req, res) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+const searchCache = async function (req, res) {
+    await client.connect();
+    console.log("This is the searchCache handler");
+
+    username = req.body.username2;
+	query = req.body.newSearch;
+
+    if (!username) {
+        console.log("No username found in request body");
+        res.status(400).send("Username is required");
+        await client.disconnect();
+        return;
+    }
+	if (!query) {
+		console.log("no query given")
+	} else {
+    	names = await client.KEYS('*' + query + '*');
+		console.log(names)
+	}
+
+    if (names === null || names === undefined) {
+        console.log("No profiles found");
+        res.status(404).send("No profiles found");
+    } else {
+		if (!username) {
+			console.log("username not sent to handler")
+		}
+        res.cookie('data', names)
+		res.cookie('username', username)
+		res.sendFile(__dirname + '/public/HTML/search.html')
+    }
+    await client.disconnect();
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const returnToProfile = async function (req, res) {
+    await client.connect()
+    console.log("This is the return handler")
+	let username = req.body.username;
+	let data = await client.hGetAll(username)
+	if (username === undefined || username === null) {
+		console.log("username bad input")
+		res.sendFile(__dirname + "/public/index.html")
+	} else {
+		res.cookie('data', JSON.stringify(data))
+		res.cookie('user', username)
+		res.sendFile(__dirname + "/public/HTML/profile.html")
+	}
+    await client.disconnect()
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 app.post("/login", checkCreds)
 app.post("/updateBio", updateBio)
 app.post("/getFriends", getFriends)
 app.post("/search", searchCache)
+app.post("/return", returnToProfile)

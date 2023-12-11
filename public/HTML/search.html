@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../javascript/search.js"defer></script>
+</head>
+<body>
+    <form action="/return" method="post">
+        <input type="hidden" id="username" name="username">
+        <button type="submit" id="returnButton">Return to Profile</button>
+    </form>
+    <form action="/search" method="post">
+        <input type="hidden" id="username2" name="username2">
+        <input type="text" id="newSearch" name="newSearch">
+        <button type="submit" id="search">New Search</button>
+    </form>
+    <div> The results are:
+        <div id="results"></div>
+    </div>
+</body>
+</html>

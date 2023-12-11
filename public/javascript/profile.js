@@ -36,6 +36,18 @@ window.onload = () => {
   let userCookie = getCookie('user');
   deleteCookie('user');
 
+  try{
+    let loginCookie = getCookie('logins')
+    deleteCookie('logins')
+    logins = document.getElementById("numLogins")
+    if (loginCookie) {
+      logins.innerHTML = loginCookie
+    } else {
+
+    }
+  } catch {
+    console.log("no login cookies sent")
+  }
   if (dataCookie) {
     const data = parseObjectFromCookie(dataCookie);
     const bio = document.getElementById("bioText");
@@ -46,8 +58,10 @@ window.onload = () => {
     const name = document.getElementById("name");
     const username = document.getElementById("username");
     const username1 = document.getElementById("username1");
+    const username2 = document.getElementById("username2");
     username.value = userCookie;
     username1.value = userCookie;
+    username2.value = userCookie;
     name.innerHTML = userCookie;
 
     // Event listener for Get Friends button

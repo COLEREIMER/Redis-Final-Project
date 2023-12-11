@@ -15,16 +15,20 @@
         <!-- <div id="links">
             <a href="../../HTML/friendlist.html" class="button">Friends</a>
         </div> -->
-        <form id="search">
+        <form id="search" action="/search" method="post">
             <div id="searchBox">
                 <div id="searchIcon">&#128269;</div>
-                <input type="text" placeholder="Search">
+           
+                    <input type="hidden" id="username2" name="username2">
+                    <input type="text" id="newSearch" name="newSearch">
+                    <button type="submit" id="newSearch">New Search</button>
             </div>
         </form>
     </div>
     <div id="content">
         <div id="profileInfo">
             <div id="name"></div>
+            <div id="numLogins"></div>
             <form action="/updateBio" method="post">
                 <input type="text" id="newBio" name="newBio">
                 <input type="hidden" id="username" name="username">
