@@ -12,10 +12,9 @@
     <!-- Modify body based on Redis Return values? -->
     
     <div id="nav">
-        <div id="links">
-            <a href="profile.html" class="button">Profile</a>
-            <a href="friendlist.html" class="button">Friends</a>
-        </div>
+        <!-- <div id="links">
+            <a href="../../HTML/friendlist.html" class="button">Friends</a>
+        </div> -->
         <form id="search">
             <div id="searchBox">
                 <div id="searchIcon">&#128269;</div>
@@ -25,12 +24,10 @@
     </div>
     <div id="content">
         <div id="profileInfo">
-            <!-- <div id="profilePicture">
-            </div> -->
             <div id="name"></div>
             <form action="/updateBio" method="post">
                 <input type="text" id="newBio" name="newBio">
-                <input type="hidden" id="usernameBio" name="usernameBio">
+                <input type="hidden" id="username" name="username">
                 <button type="submit" id="updateBio">Update Bio</button>
             </form>
         </div>
@@ -38,6 +35,12 @@
             <div id="bioText">
             </div>
         </div>
+
+        <form action="/getFriends" method="post">
+            <input type="hidden" id="username" name="username">
+            <button type="submit" id="getFriendsButton">Get Friends</button>
+        </form>
+
         <div id="posts">
             <div class="post"></div>
             <div class="post"></div>
