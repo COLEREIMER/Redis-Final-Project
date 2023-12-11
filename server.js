@@ -96,7 +96,7 @@ const getFriends = async function (req, res) {
             const friendsHtml = friendsList.split(',').map(friend => `<li>${friend}</li>`).join('');
             const htmlContent = `<ul>${friendsHtml}</ul>`;
 
-            res.send(htmlContent);
+            res.render(__dirname + "/public/HTML/friendlist.html", htmlContent);
         }
     } catch (error) {
         console.error("Error fetching friends list: ", error);
@@ -133,4 +133,4 @@ const searchCache = async function (req, res) {
 app.post("/login", checkCreds)
 app.post("/updateBio", updateBio)
 app.post("/getFriends", getFriends)
-app.post("/search", searcheCache)
+app.post("/search", searchCache)
