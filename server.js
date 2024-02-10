@@ -9,10 +9,10 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 
 const redis = require("redis");
 const client = redis.createClient({
-	    password: 'wIaMfjYcxTVDYUUefnld63D0OOPqGfe4',
+	    password: '',
 	    socket: {
-		            host: 'redis-11368.c1.us-west-2-2.ec2.cloud.redislabs.com',
-		            port: 11368
+		            host: 'Website and Username',
+		            port: Server Port
 		        }
 });
 
